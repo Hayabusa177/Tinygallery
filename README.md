@@ -2,17 +2,34 @@
 A tiny gallery web application created by flask, 
 
 # Installation Instructions:
+
 Change work direction
+```
   cd <path>
+```
+
 Create virtual environment
+```
   python -m venv venv
+```
+
 Switch to virtual environment
+```
   source ./venv/bin/activate
+```
+
 Install dependencies
+```
   pip install -r ./requirements.txt
+ ```
+ 
 Start WSGI server
+```
   waitress-serve --host 127.0.0.1 --call tinyGallery:create_app
+```
+
 Proxy WSGI server with http server for example :nginx
+
 * add some config to /etc/nginx/nginx.conf
   ```
   server {
