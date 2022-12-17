@@ -21,7 +21,11 @@ Switch to virtual environment
 Install dependencies
 ```
   pip install -r ./requirements.txt
- ```
+```
+Initialization database
+```
+flask --app tinyGallery init-db
+```
  
 Start WSGI server
 ```
@@ -31,7 +35,7 @@ Start WSGI server
 Proxy WSGI server with http server for example :nginx
 
 * add some config to /etc/nginx/nginx.conf
-  ```
+```
   server {
     listen 17779;
     listen [::]:17779 ipv6only=on;
@@ -41,4 +45,9 @@ Proxy WSGI server with http server for example :nginx
         proxy_pass http://127.0.0.1:8080/;
     }
 }
+```
+
+Start nginx
+```
+systemctl start nginx
 ```
