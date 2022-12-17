@@ -24,7 +24,7 @@ Install dependencies
 ```
 Initialization database
 ```
-flask --app tinyGallery init-db
+  flask --app tinyGallery init-db
 ```
  
 Start WSGI server
@@ -49,5 +49,5 @@ Proxy WSGI server with http server for example :nginx
 
 Start nginx
 ```
-systemctl start nginx
+  systemctl start nginx
 ```
