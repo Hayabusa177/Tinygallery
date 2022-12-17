@@ -1,0 +1,33 @@
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS images;
+DROP TABLE IF EXISTS remarks;
+
+CREATE TABLE users(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    userName TEXT UNIQUE NOT NULL,
+    passWord TEXT NOT NULL,
+    date TEXT NOT NULL
+);
+
+CREATE TABLE images(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fileName TEXT NOT NULL,
+    fileType TEXT NOT NULL,
+    filePath TEXT NOT NULL,
+    imageTitle TEXT NOT NULL,
+    description TEXT NOT NULL,
+    dots INTEGER DEFAULT 0,
+    user TEXT NOT NULL,
+    date TEXT NOT NULL,
+    uuid TEXT NOT NULL
+);
+
+CREATE TABLE remarks(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    postUUID TEXT NOT NULL,
+    userName TEXT NOT NULL,
+    content TEXT NOT NULL,
+    depth INTGER DEFAULT 1,
+    replyTo TEXT,
+    date TEXT NOT NULL
+);

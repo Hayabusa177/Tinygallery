@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}TinyGallery {% endblock %}
+
+{% block head %}
+<script>
+    document.onreadystatechange=function(){
+        if(document.readyState == "complete"){
+            document.getElementById("loading").style.display = "none"
+            document.getElementById("imagePlace").style.display = "flex"
+        }
+    }
+</script>
+{% endblock %}
+
+{% block body %}
+
+<div  id="loading" style="height:100vh;display: flex;justify-content: center;align-items: center;">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <span>loading please wait...</span>
+</div>
+
+<div id="imagePlace" style="display: none;">
+    {% for x in images %}
+    <div class="card imageCard">
+        <div class="imageCardTop">
+            <img src="static/images/{{ x["uuid"] }}.{{ x["fileType"] }}" alt="{{ x["uuid"] }}" class="cardImages" onclick="openFullImage({{ loop["index"] }})">
+            <h4 class="card-title imageTitle">{{ x["imageTitle"] }}</h4>
+        </div>
+        <div class="card-body imageDescriptionPlace">
+            <p class="card-text imageDescription">{{ x["description"] }}</p>
+            <div class="d-flex cardBottom">
+                <img class="imageUserAvatar" src="static/avatars/{{ x["user"] }}.jpg">
+                <p class="card-text imageCreatedByUser">{{ x["user"] }}</p>
+                <span class="badge text-bg-secondary ms-auto">{{ x["date"] }}</span>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% if divide_by == 0 %}
+        <!-- none -->
+    {% else %}
+        <div id="pagerBox">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {% for x in range(divide_by) %}
+                        {% if loop.index == 1 %}
+                            <li class="page-item"><a class="page-link" href="/">1</a></li>
+                        {% endif %}
+                            <li class="page-item"><a class="page-link" href="?page={{ loop["index"] +1 }}">{{ loop["index"] +1}}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

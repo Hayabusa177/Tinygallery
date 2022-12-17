@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="/static/css/imageDetailPage.css">
+{% endblock %}
+
+{% block title %}ImageDetails{% endblock %}
+
+{% block body %}
+<div id="bigSizeImageBox">
+    <div id="imageBox" class="container">
+        <img id="bigSizeImage" src="/static/images/originalSize/{{ image_uuid }}.{{ datas["fileType"] }}" alt="{{ image_uuid }}" onclick="openOriginalImage('{{ image_uuid }}', '{{ datas["fileType"] }}')">
+    </div>
+    <div id="rightBarBox" class="container">
+        <div id="descriptionBox">
+            <div id="userBox">
+                <img class="imageUserAvatar" src="/static/avatars/{{ datas["user"] }}.jpg" onclick="openUserProfile('{{ datas["user"] }}')">
+                <h3>{{ datas["user"] }}</h3>
+            </div>
+            <div id="imagePostDescription">
+                <p>{{ datas["description"] }}</p>
+            </div>
+            <div id="dateBox">
+                {{ datas["date"] }}
+            </div>
+        </div>
+        <div id="buttonGroupBox">
+            {% if g.user %}
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#remarkModal">
+                    Send remark
+                </button>
+            {% else %}
+                <!-- None -->
+            {% endif %}
+        </div>
+        <div class="container" id="remarksBox">
+            {% for x in remarks %}
+                <div class="remarksBoxChild">
+                    <div class="remarkUserBox">
+                        <img class="imageUserAvatar" src="/static/avatars/{{ x["userName"] }}.jpg" onclick="openUserProfile('{{ x["userName"] }}')">
+                        <h5>{{ x["userName"] }}</h5>
+                    </div>
+                    <div class="remarkContentBox">{{ x["content"] }}</div>
+                    <div class="remarkDateBox">{{ x["date"] }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="remarkModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="remarkModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h1 class="modal-title fs-5">New remark</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <form action="../sendRemark" method="post">
+            <div class="form-floating mb-3">
+                <input name="replyTo" type="text" class="form-control" id="replyToInput" placeholder="username">
+                <label for="replyToInput">Reply to</label>
+            </div>
+            <div class="form-floating mb-3">
+                <textarea name="remarkContent" type="text" class="form-control" id="remarkContentInput" placeholder="username"></textarea>
+                <label for="remarkContentInput">Content</label>
+            </div>
+            <input name="UUID" style="display: none;" id="virtualInputForUUID">
+            <input class="btn btn-primary" type="submit" value="Send">
+        </form>
+        </div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}

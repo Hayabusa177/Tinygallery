@@ -1,0 +1,4 @@
+include tinyGallery/createTables.sql
+graft tinyGallery/static
+graft tinyGallery/templates
+global-exclude *.pyc

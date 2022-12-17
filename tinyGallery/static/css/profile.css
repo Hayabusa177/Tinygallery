@@ -1,0 +1,71 @@
+#userProfile{
+    background-color: white;
+    border-radius: 10px;
+
+    position: relative;
+    width: 100%;
+    height: 330px;
+    top: 15px;
+    padding: 0%;
+    display: flex;
+    flex-wrap: wrap;
+}
+#userProfileBackgroundImageBox{
+    background-color: gray;
+    border-radius: 10px 10px 0 0;
+
+    width: 100%;
+    height: 60%;
+}
+#userAvatarBox{
+    border: 1px solid #0d6efd;
+    border-radius: 10px;
+
+    position: relative;
+    left: 50px;
+    bottom: 50px;
+    width: 150px;
+    height: 150px;
+}
+#userDescriptionBox{
+    
+
+    position: relative;
+    left: 100px;
+    top: 20px;
+}
+#editButtonsBox{
+    
+
+    position: relative;
+    top: 17%;
+    right: 2%;
+}
+#userImagesBox{
+    background: white;
+    border-radius: 10px;
+
+    position: relative;
+    width: 100%;
+    height: auto;
+    top: 25px;
+    margin-top: 25px;
+    padding: 0;
+}
+.userAvatarImg{
+    object-fit: cover;
+    border-radius: 10px;
+
+    width: 100%;
+    height: 100%;
+}
+@media screen and (max-width: 440px){
+    #userImagesBox{
+        width: 100%;
+        margin: 0;
+    }
+    #pageShell{
+        margin: 0;
+        padding: 0%;
+    }
+}

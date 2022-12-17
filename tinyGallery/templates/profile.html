@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="/static/css/profile.css">
+{% endblock %}
+
+{% block title %} {{ user_name }} {% endblock %}
+
+{% block body %}
+<div id="pageShell" class="container-xl">
+    <div id="userProfile" class="container-lg shadow">
+        <div id="userProfileBackgroundImageBox"></div>
+        <div id="userAvatarBox" class="">
+            <img src="../../static/avatars/{{ user_name }}.jpg" class="userAvatarImg" onclick="openOriginalSizeAvatar('{{ user_name }}')">
+        </div>
+        <div id="userDescriptionBox">
+            <h2>{{ user_name }}</h2>
+        </div>
+        {% if g.user.userName == user_name %}
+        <div id="editButtonsBox" class="ms-auto">
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalEditProfile">Edit profile</button>
+        </div>
+        {% else %}
+        <!-- hide -->
+        {% endif %}
+    </div>
+    <div id="userImagesBox" class="container-lg d-flex shadow">
+        <div id="imagePlace">
+            {% for x in user_images %}
+            <div class="card imageCard" style="width: 400px; height: 380px;">
+                <div class="imageCardTop">
+                    <img src="/static/images/{{ x["uuid"] }}.{{ x["fileType"] }}" alt="{{ x["uuid"] }}"  loading="lazy" class="cardImages" onclick="openFullImage({{ loop["index"] }})">
+                    <h4 class="card-title imageTitle">{{ x["imageTitle"] }}</h4>
+                </div>
+                <div class="card-body imageDescriptionPlace">
+                    <p class="card-text imageDescription">{{ x["description"] }}</p>
+                    <div class="d-flex cardBottom">
+                        <img class="imageUserAvatar" src="/static/avatars/{{ x["user"] }}.jpg">
+                        <p class="card-text imageCreatedByUser">{{ x["user"] }}</p>
+                        <span class="badge text-bg-secondary ms-auto">{{ x["date"] }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="fade modal" id="modalEditProfile" tabindex="-1" aria-labelledby="modalEditProfileModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Set up your profile</h5>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/user/setUpProfile" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label">Select image for your avatar</label>
+                        <input type="file" name="userAvatar" class="form-control" id="setUpAvatar">
+                    </div>
+                    <button class="btn btn-outline-primary">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

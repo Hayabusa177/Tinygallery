@@ -1,0 +1,248 @@
+body{
+    height: 100vh;
+    background: #ececec;
+    display: flex;
+    flex-direction: column;
+}
+header {
+    background-color: rgba(255, 255, 255, 0.800);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    z-index: 5;
+}
+header a {
+    color: #8e8e8e;
+    transition: color .15s ease-in-out;
+}
+#registerBox, #loginBox{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 69px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+
+    padding: 50px 55px 50px 55px;
+    width: 350px;
+
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px 8px rgba(0, 0, 0, 0.200);
+    box-sizing: border-box;
+    animation: scale 100ms;
+    z-index: 3;
+}
+#cardUploadPicture{
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 69px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+
+    width: 600px;
+    height: 800px;
+
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px 8px rgba(0, 0, 0, 0.200);
+    box-sizing: border-box;
+    animation: scale 100ms;
+    z-index: 2;
+}
+#uploadImageButton{
+    margin-left: auto !important;
+}
+#cardTop{
+    height: 60%;
+    width: 100%;
+    background-color:royalblue;
+    border-radius: 15px 15px 0 0;
+}
+#cardTitle{
+    margin-top: 209px;
+}
+.imageTitle{
+    color: white;
+    display: inline;
+    position: relative;
+    bottom: 45px;
+    margin: 0 50px 0 20px;
+    white-space: nowrap;
+}
+#closeButtonPostCard{
+    background-color: white;
+    position: relative;
+    right: 15px;
+    top: 15px;
+}
+#imagePlace{
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    top: 0;
+    animation: fadeIn 600ms;
+}
+#pagerBox{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+@keyframes scale{
+    from {
+        opacity: 0;
+        transform: scale(0.1,0.1);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1,1);
+    }
+}
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+        top: 10px;
+    }
+    to{
+        opacity: 1;
+        top: 0;
+    }
+}
+.imageCard{
+    width: 450px;
+    height: 380px;
+    background-color: white;
+    transition:transform 300ms, box-shadow 300ms;
+    transform: scale(1,1);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.300);
+
+    margin-left: 25px;
+    margin-top: 25px;
+    border-radius: 15px;
+    z-index: 1;
+    overflow: hidden;
+}
+.imageCard:hover{
+    box-shadow: 0px 0px 20px 8px rgba(0, 0, 0, 0.300);
+    transform: scale(1.05,1.05);
+}
+.imageCardTop{
+    width: 100%;
+    height: 67%;
+}
+.imageDescriptionPlace{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.imageDescription{
+    height: 60px;
+    max-height: 100px;
+    overflow: auto;
+}
+.cardImages{
+    width: 600px;
+    height: 100%;
+    border-radius: 15px 15px 0 0;
+    object-fit: cover;
+}
+.cardBottom{
+    align-items: baseline;
+
+    width: 100%;
+    position: relative;
+    bottom: 30px;
+    justify-content: flex-start;
+}
+.imageCreatedByUser{
+
+
+    position: relative;
+    left: 10px;
+}
+.imageUserAvatar{
+    border-radius: 100px;
+
+    width: 50px;
+    height: 50px;
+    padding: 0%;
+    margin: 0;
+}
+@media screen and (max-width: 1440px){
+    .imageCard{
+        width: 600px;
+        height: 500px;
+        background-color: white;
+        transition:transform 300ms, box-shadow 300ms;
+        transform: scale(1,1);
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.300);
+    
+        margin-left: 30px;
+        margin-top: 30px;
+        border-radius: 15px;
+        z-index: 1;
+        overflow: hidden;
+    }
+    .imageCardTop{
+        width: 100%;
+        height: 73%;
+    }
+    .imageDescriptionPlace{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .imageDescription{
+        height: 60px;
+        max-height: 100px;
+        overflow: auto;
+    }
+    .cardImages{
+        width: 600px;
+        height: 100%;
+        border-radius: 15px 15px 0 0;
+        object-fit: cover;
+    }
+}
+@media screen and (max-width: 440px){
+    body{
+        margin: 0%;
+        padding: 0%;
+    }
+    .imageCard{
+        width: 100%;
+        height: 400px;  
+        margin: 35px 0 0 0;  
+    }
+    .imageCardTop{
+        height: 65%;
+    }
+    #imagePlace{
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    #cardUploadPicture{
+        top: 130px;
+        width: 100%;
+        height: 800px;
+    }
+    .navbar-brand{
+        width: 100%;
+    }
+    #uploadImageButton{
+        margin-left: 0;
+    }
+    #userAdminButton{
+        margin-left: auto;
+    }
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block head %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap-5.2.3-dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="/static/bootstrap-5.2.3-dist/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/imageDetailPage.css">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header class="navbar shadow-sm sticky-top py-2">
+        <nav class="container-fluid d-flex">
+            <a class="navbar-brand" href="/">TinyGallery</a>
+            {% if g.user %}
+                <button type="button" class="m-2 btn btn-outline-primary"  id="uploadImageButton" onclick="displayPostCard()">Post picture</button>
+                <div class="dropdown dropstart">
+                    <button class="m-2 btn btn-outline-primary dropdown-toggle" id="userAdminButton"
+                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ user_name }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/user/userProfile/{{ user_name }}">Profile</a></li>
+                        <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
+                    </ul>
+              </div>
+              <img class="imageUserAvatar" src="/static/avatars/{{ user_name }}.jpg">
+            {% else %}
+                <button type="button" class="m-2 btn btn-outline-primary ms-auto" onclick="convertBoxToRegister()">Register</button>
+                <button type="button" class="btn btn-outline-primary" onclick="convertBoxToLogin()">Login</button>
+            {% endif %}
+        </nav>
+    </header>
+
+    <div class="container" id="registerBox">
+        <button type="button" class="btn-close ms-auto" aria-label="Close" onclick="hideRegisterBox()"></button>
+        <h2>Register</h2>
+        <form action="/auth/register" method="post">
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" name="registerUserName">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="registerPassword">
+            </div>
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
+        </form>
+        <a href="#login" class="ms-auto" onclick="convertBoxToLogin()">To Login</a>
+    </div>
+
+    <div class="container" id="loginBox">
+        <button type="button" class="btn-close ms-auto" aria-label="Close" onclick="hideLoginBox()"></button>
+        <h2>Login</h2>
+        <form action="/auth/login" method="post">
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" name="loginUserName">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="loginPassword">
+            </div>
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
+        </form>
+        <a href="#logined" class="ms-auto" onclick="convertBoxToRegister()">To Register</a>
+    </div>
+
+    {% if g.user %}
+    <div class="card" id="cardUploadPicture">
+        <div id="cardTop">
+            <button type="button" class="btn-close d-flex ms-auto" 
+            aria-label="Close" id="closeButtonPostCard"
+            onclick="closePostCard()"
+            ></button>
+            <h2 id="cardTitle">To post image</h2>
+        </div> 
+        <div class="card-body">
+            <form action="/image/upload" method="post" enctype="multipart/form-data">
+                <div class="form-floating mb-3">
+                    <input type="text" name="postTitle" class="form-control" id="postTitle" placeholder="Title">
+                    <label for="postTitle">Title</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea name="description" type="text" class="form-control" id="description" placeholder="PictureDescription"></textarea>
+                    <label for="description">PictureDescription</label>
+                </div>
+                <input class="form-control" type="file" name="uploadImage">
+                <br>
+                <button type="submit" class="btn btn-outline-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    {% else %}
+        <!-- None -->
+    {% endif %}
+
+
+    {% block body %}
+    {% endblock %}
+
+
+    <script type="text/javascript" src="/static/js/Main.js"></script>
+</body> 
+</html>
