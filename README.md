@@ -37,8 +37,8 @@ Proxy WSGI server with http server for example :nginx
 * add some config to /etc/nginx/nginx.conf
 ```
   server {
-    listen 17779;
-    listen [::]:17779 ipv6only=on;
+    listen 80;
+    listen [::]:80 ipv6only=on;
     server_name tinyGallery;
         
     location / {
