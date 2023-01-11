@@ -4,9 +4,15 @@ A tiny gallery web application created by flask,
 # Installation Instructions:
 
 Install sqlite3 
+
 *Arch/Manjaro*
 ```
   sudo pacman -S sqlite3
+```
+
+*Ubtuntu/debian*
+```
+  sudo apt install sqlite3
 ```
 
 Change work direction
