@@ -3,7 +3,7 @@ A tiny gallery web application created by flask,
 
 # Installation Instructions:
 
-### Install sqlite3 
+##### Install sqlite3 
 
 *Arch/Manjaro*
 ```
@@ -15,41 +15,41 @@ A tiny gallery web application created by flask,
   sudo apt install sqlite3
 ```
 
-### Clone source code
+##### Clone source code
 ```
   git clone https://github.com/Hayabusa177/Tinygallery.git TinyGallery
 ```
 
-### Change work direction
+##### Change work direction
 ```
   cd TinyGallery
 ```
 
-### Create virtual environment
+##### Create virtual environment
 ```
   python -m venv venv
 ```
 
-### Switch to virtual environment
+##### Switch to virtual environment
 ```
   source ./venv/bin/activate
 ```
 
-### Install dependencies
+##### Install dependencies
 ```
   pip install -r ./requirements.txt
 ```
-### Initialization database
+##### Initialization database
 ```
   flask --app tinyGallery init-db
 ```
  
-### Start WSGI server
+##### Start WSGI server
 ```
   waitress-serve --host 127.0.0.1 --call tinyGallery:create_app
 ```
 
-### Proxy WSGI server with http server for example :nginx
+##### Proxy WSGI server with http server for example :nginx
 
 * add some config to /etc/nginx/nginx.conf
 ```
@@ -64,7 +64,7 @@ A tiny gallery web application created by flask,
 }
 ```
 
-### Start nginx
+##### Start nginx
 ```
   systemctl start nginx
 ```
