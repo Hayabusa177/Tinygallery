@@ -19,13 +19,13 @@ def user_profile(user_id):
     db = get_db()
 
     try:
-        user_images = db.execute(
-            "SELECT id, imageTitle, description, dots, user, date, uuid, fileType FROM images WHERE user = ?;", (user_id,)
+        user_posts = db.execute(
+            "SELECT * FROM posts WHERE userName = ?;", (user_id,)
         ).fetchall()
     except db.IntegrityError:
-        return "Failed to get your images"
+        return "Failed to get your posts"
 
-    return render_template("profile.html", user_name = user_id, user_images = user_images)
+    return render_template("profile.html", user_name = user_id, user_posts = user_posts)
 
 @userbp.route("setUpProfile", methods=("GET", "POST"))
 def set_up_user_profile():

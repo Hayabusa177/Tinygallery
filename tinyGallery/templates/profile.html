@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="/static/css/profile.css">
 {% endblock %}
 
-{% block title %} {{ user_name }} {% endblock %}
+{% block title %} {{ user_name }}'s profile{% endblock %}
 
 {% block body %}
 <div id="pageShell" class="container-xl">
@@ -25,18 +25,18 @@
         {% endif %}
     </div>
     <div id="userImagesBox" class="container-lg d-flex shadow">
-        <div id="imagePlace">
-            {% for x in user_images %}
+        <div id="imagePlaceProfile">
+            {% for x in user_posts %}
             <div class="card imageCard" style="width: 400px; height: 380px;">
                 <div class="imageCardTop">
-                    <img src="/static/images/{{ x["uuid"] }}.{{ x["fileType"] }}" alt="{{ x["uuid"] }}"  loading="lazy" class="cardImages" onclick="openFullImage({{ loop["index"] }})">
-                    <h4 class="card-title imageTitle">{{ x["imageTitle"] }}</h4>
+                    <img src="/static/posts/orginalSizeImages/{{ x["postUUID"] }}/{{ x["postUUID"] }}.{{ x["coverFileType"] }}" alt="{{ x["postUUID"] }}"  loading="lazy" class="cardImages" onclick="openFullImage({{ loop["index0"] }})">
+                    <h4 class="card-title postTitle">{{ x["postTitle"] }}</h4>
                 </div>
                 <div class="card-body imageDescriptionPlace">
                     <p class="card-text imageDescription">{{ x["description"] }}</p>
                     <div class="d-flex cardBottom">
-                        <img class="imageUserAvatar" src="/static/avatars/{{ x["user"] }}.jpg">
-                        <p class="card-text imageCreatedByUser">{{ x["user"] }}</p>
+                        <img class="imageUserAvatar" src="/static/avatars/{{ x["userName"] }}.jpg">
+                        <p class="card-text imageCreatedByUser">{{ x["userName"] }}</p>
                         <span class="badge text-bg-secondary ms-auto">{{ x["date"] }}</span>
                     </div>
                 </div>

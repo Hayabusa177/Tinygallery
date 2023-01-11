@@ -5,9 +5,9 @@ body{
     flex-direction: column;
 }
 header {
-    background-color: rgba(255, 255, 255, 0.800);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
+    background-color: rgba(255, 255, 255, 0.700);
+    -webkit-backdrop-filter: saturate(180%) blur(40px);
+    backdrop-filter: saturate(180%) blur(40px);
     z-index: 5;
 }
 header a {
@@ -44,7 +44,6 @@ header a {
     margin-right: auto;
     left: 0;
     right: 0;
-    text-align: center;
 
     width: 600px;
     height: 800px;
@@ -56,8 +55,22 @@ header a {
     animation: scale 100ms;
     z-index: 2;
 }
+#cardTop{
+    text-align: center;
+}
+.uploadCardBody{
+    display: flex;
+    flex-direction: column;
+}
+#postCoverFormBox{
+    display: block;
+}
 #uploadImageButton{
     margin-left: auto !important;
+}
+#uploadCardBottomBox{
+    display: flex;
+    flex-direction: row-reverse;
 }
 #cardTop{
     height: 60%;
@@ -68,13 +81,14 @@ header a {
 #cardTitle{
     margin-top: 209px;
 }
-.imageTitle{
+.postTitle{
     color: white;
     display: inline;
     position: relative;
     bottom: 45px;
     margin: 0 50px 0 20px;
     white-space: nowrap;
+    text-shadow: 0px 0px 5px black;
 }
 #closeButtonPostCard{
     background-color: white;
@@ -85,8 +99,10 @@ header a {
 #imagePlace{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     position: relative;
-    top: 0;
+    right: 25px;
+    top: 70px;
     animation: fadeIn 600ms;
 }
 #pagerBox{
@@ -109,11 +125,11 @@ header a {
 @keyframes fadeIn {
     from{
         opacity: 0;
-        top: 10px;
+        top: 90px;
     }
     to{
         opacity: 1;
-        top: 0;
+        top: 70px;
     }
 }
 .imageCard{
@@ -137,6 +153,7 @@ header a {
 .imageCardTop{
     width: 100%;
     height: 67%;
+    min-height: 67%;
 }
 .imageDescriptionPlace{
     display: flex;
@@ -168,6 +185,7 @@ header a {
 
     position: relative;
     left: 10px;
+    bottom: 15px;
 }
 .imageUserAvatar{
     border-radius: 100px;
@@ -176,6 +194,20 @@ header a {
     height: 50px;
     padding: 0%;
     margin: 0;
+    position: relative;
+    top: 5px;
+}
+.likeButton{
+    display: flex;
+    color: rgba(255, 0, 0, 0.5);
+}
+.unLikeButton{
+    display: none;
+    color: rgba(255, 0, 0, 0.5);
+}
+.waitIcon{
+    display: none;
+    color: rgba(255, 0, 0, 0.5);
 }
 @media screen and (max-width: 1440px){
     .imageCard{
@@ -195,6 +227,7 @@ header a {
     .imageCardTop{
         width: 100%;
         height: 73%;
+        min-height: 73%;
     }
     .imageDescriptionPlace{
         display: flex;
@@ -222,14 +255,18 @@ header a {
     .imageCard{
         width: 100%;
         height: 400px;  
-        margin: 35px 0 0 0;  
+        margin: 10px 0 0 0;  
+        border-radius: 0%;
     }
     .imageCardTop{
         height: 65%;
+        min-height: 65%;
     }
     #imagePlace{
         flex-direction: column;
         flex-wrap: nowrap;
+        right: 0;
+        margin-top: 10px;
     }
     #cardUploadPicture{
         top: 130px;

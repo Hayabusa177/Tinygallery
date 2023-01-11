@@ -12,22 +12,22 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    <header class="navbar shadow-sm sticky-top py-2">
+    <header class="navbar shadow-sm fixed-top py-2">
         <nav class="container-fluid d-flex">
             <a class="navbar-brand" href="/">TinyGallery</a>
             {% if g.user %}
-                <button type="button" class="m-2 btn btn-outline-primary"  id="uploadImageButton" onclick="displayPostCard()">Post picture</button>
+                <button type="button" class="m-2 btn btn-outline-primary"  id="uploadImageButton" onclick="displayPostCard()">New post</button>
                 <div class="dropdown dropstart">
                     <button class="m-2 btn btn-outline-primary dropdown-toggle" id="userAdminButton"
                         type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ user_name }}
+                        {{ g.user.userName }}
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/user/userProfile/{{ user_name }}">Profile</a></li>
+                        <li><a class="dropdown-item" href="/user/userProfile/{{ g.user.userName }}">Profile</a></li>
                         <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
                     </ul>
               </div>
-              <img class="imageUserAvatar" src="/static/avatars/{{ user_name }}.jpg">
+              <img class="imageUserAvatar" src="/static/avatars/{{ g.user.userName }}.jpg" onclick="openUserProfile('{{ g.user.userName }}')">
             {% else %}
                 <button type="button" class="m-2 btn btn-outline-primary ms-auto" onclick="convertBoxToRegister()">Register</button>
                 <button type="button" class="btn btn-outline-primary" onclick="convertBoxToLogin()">Login</button>
@@ -76,9 +76,9 @@
             aria-label="Close" id="closeButtonPostCard"
             onclick="closePostCard()"
             ></button>
-            <h2 id="cardTitle">To post image</h2>
+            <h2 id="cardTitle">New post</h2>
         </div> 
-        <div class="card-body">
+        <div class="card-body uploadCardBody">
             <form action="/image/upload" method="post" enctype="multipart/form-data">
                 <div class="form-floating mb-3">
                     <input type="text" name="postTitle" class="form-control" id="postTitle" placeholder="Title">
@@ -88,9 +88,23 @@
                     <textarea name="description" type="text" class="form-control" id="description" placeholder="PictureDescription"></textarea>
                     <label for="description">PictureDescription</label>
                 </div>
-                <input class="form-control" type="file" name="uploadImage">
-                <br>
-                <button type="submit" class="btn btn-outline-primary">Submit</button>
+                <div id="postCoverFormBox">
+                    <input id="postCoverForm" class="form-control" type="file" name="postCoverImage">    
+                    <label for="postCoverForm" id="postCoverFormLable">Post cover</label>
+                </div>
+                <div>
+                    <input id="postImageForm" class="form-control" type="file" name="uploadFiles" multiple="" >
+                    <label for="postImageForm">Centent Images</label> 
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="checkAutoSelectCover" name="StatusOfAutoSelectCover"
+                        onclick="inputStatusHandler()"
+                    >
+                    <label class="form-check-label" for="checkAutoSelectCover">Auto select the cover from content images</label>
+                </div>                
+                <div id="uploadCardBottomBox">
+                    <button type="submit" class="btn btn-outline-primary">Submit</button>
+                </div>
             </form>
         </div>
     </div>
@@ -105,5 +119,7 @@
 
 
     <script type="text/javascript" src="/static/js/Main.js"></script>
+    {% block scripts %}
+    {% endblock %}
 </body> 
 </html>

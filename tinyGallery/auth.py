@@ -2,15 +2,12 @@ import functools
 import time
 import json
 import re
-from flask import(
-    Blueprint, flash, g, redirect, 
-    render_template, request, session, url_for
-)
+from flask import *
 from werkzeug.security import check_password_hash, generate_password_hash
 from tinyGallery.db import get_db
-    
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
+
 
 @bp.route("/register", methods=("GET", "POST"))
 def register():
@@ -29,13 +26,13 @@ def register():
             error = "Username is required"
         elif not password:
             error = "Password is required"
-        elif not re.match(regular_expression_pattern,username):
+        elif not re.match(regular_expression_pattern, username):
             error = "Username must be a combination of letters and numbers"
         elif not re.match(regular_expression_pattern, password):
             error = "Username must be a combination of letters and numbers"
         elif not len(username) <= user_name_length_limit:
             error = "The length of username must be less 12 or equal to  12"
-        
+
         if error is None:
             try:
                 db.execute(
@@ -46,9 +43,10 @@ def register():
             except db.IntegrityError:
                 erorr = f"User {username} is alreadyy registered"
             else:
-                return redirect(url_for("index_page"))
+                return redirect(url_for("/.index_page"))
         flash(error)
     return "<h1>" + error + "</h1>"
+
 
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
@@ -71,7 +69,7 @@ def login():
             error = "Username is required"
         elif not password:
             error = "Password is required"
-        elif not re.match(regular_expression_pattern,username):
+        elif not re.match(regular_expression_pattern, username):
             error = "Username must be a combination of letters and numbers"
         elif not re.match(regular_expression_pattern, password):
             error = "Username must be a combination of letters and numbers"
@@ -85,10 +83,11 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['userName']
-            return redirect(url_for('index_page'))
+            return redirect(url_for('/.index_page'))
 
         flash(error)
         return error
+
 
 @bp.before_app_request
 def load_logged_in_user():
@@ -101,10 +100,12 @@ def load_logged_in_user():
             'SELECT * FROM users WHERE userName = ?', (user_id,)
         ).fetchone()
 
+
 @bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('index_page'))
+    return redirect(url_for('/.index_page'))
+
 
 def login_required(view):
     @functools.wraps(view)

@@ -1,35 +1,58 @@
 #bigSizeImageBox{
     position: relative;
     display: flex;
+    flex-direction: column;
 
-
+    top: 85px;
     width: 100%;
     height: 100vh;
 }
-#imageBox{
+#coverBox{
+    width: 80%;
     max-width: 80%;
 }
-#bigSizeImage{
+#imageBox{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 80%;
+}
+#cover{
     width: 100%;
     height: 100%;
     object-fit:contain;
 }
+.imagesForDetailPage{
+    margin-top: 15px;
+}
 #rightBarBox{
-    width: 30%;
+    width: 13%;
     height: 100vh;
     display: flex;
     flex-direction: column;
+    position: fixed;
+    top: 70px;
+    right: 0px;
 
     background-color: rgba(255, 255, 255, 0.500);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
     box-shadow: 0px 15px 17px 5px rgba(0, 0, 0, 0.413);
     overflow: auto;
 }
 #descriptionBox{
     margin: 15px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.118);
+    display: flex;
+    flex-direction: column;
 }
 #userBox{
     display: flex;
+}
+#likesBox{
+    /* border-top: 1px solid rgba(0, 0, 0, 0.200); */
+    padding-top: 5px;
 }
 #dateBox{
     color: gray;
@@ -61,18 +84,28 @@
 .remarkDateBox{
     color: gray;
 }
+#postMenu{
+    display: flex;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.200);
+}
 @media screen and (max-width: 440px){
-    #bigSizeImage{
+    #cover{
         width: 100%;
         max-width: 100%;
     }
-    #bigSizeImageBox{
+    #imageBox{
         display: flex;
         flex-direction: column;
-        flex-wrap: nowrap;
         width: 100%;
+        max-width: 100%;
+    }
+    .imagesForDetailPage{
+        width: 100%;
+        max-width: 100%;
     }
     #rightBarBox{
+        display: none;
         width: 100%;
         max-width: 100%;
     }

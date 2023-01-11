@@ -1,6 +1,3 @@
-// function Hi(){
-//     alert("Under Development.");
-// }
 // function Register(){
 //     document.getElementById("Panel_Login").style.display = "none";
 //     document.getElementById("Panel_Register").style.display = "block";
@@ -86,23 +83,72 @@ function displayPostCard(){
     displayElementById("cardUploadPicture")
 }
 function openFullImage(numID){
-    let classObject = document.getElementsByClassName("cardImages")[numID-1]
+    let classObject = document.getElementsByClassName("cardImages")[numID]
     let imageUUID = classObject.alt
 
     window.open("/remark" + "/imageDetailPage/" + imageUUID)
 }
-function getUUIDForvirtualInput(){
-    let inputValue = document.getElementById("virtualInputForUUID")
-    let UUID = document.getElementById("bigSizeImage")
-    inputValue.value = UUID.alt
-}
-getUUIDForvirtualInput()
 function openUserProfile(userName){
     window.open("/user/userProfile/" + userName)
 }
 function openOriginalSizeAvatar(userName){
     window.open("/static/avatars/originalSize/" + userName + ".png")
 }
-function openOriginalImage(uuid,fileType){
-    window.open("/static/images/originalSize/" + uuid + "." + fileType)
+function sendLikedData(likedStatus, currentPOST, userNameForAuth){
+    if(userNameForAuth == "" || userNameForAuth == undefined){
+        alert("You are not logged in.")
+        return
+    }
+    const xmlhttp = new XMLHttpRequest()
+
+    let likeButtonDOM = document.getElementsByClassName("likeButton")
+    let unLikeButtonDOM = document.getElementsByClassName("unLikeButton")
+    let numberOfDotsDOM = document.getElementsByClassName("likedCount")
+    let waitIconDOM = document.getElementsByClassName("waitIcon")
+    let imageDOM = document.getElementsByClassName("cardImages")
+
+    let imageUUID = imageDOM[currentPOST].alt
+
+
+    if (likedStatus == "like"){
+        xmlhttp.open("GET","/image/likedThisPOST?UUID=" + imageUUID + "&likedStatus=like")
+        xmlhttp.send()
+        likeButtonDOM[currentPOST].style.display= "none"
+        waitIconDOM[currentPOST].style.display= "flex"
+    }
+
+    if (likedStatus == "unlike"){
+        xmlhttp.open("GET", "/image/likedThisPOST?UUID=" + imageUUID + "&likedStatus=unlike")
+        xmlhttp.send()
+        unLikeButtonDOM[currentPOST].style.display= "none"
+        waitIconDOM[currentPOST].style.display= "flex"
+    }
+
+    xmlhttp.onreadystatechange=function(){
+        if (xmlhttp.readyState==4 && xmlhttp.status==200){
+            jsonObj = JSON.parse(xmlhttp.response)
+            if (jsonObj.status == "like"){
+                waitIconDOM[currentPOST].style.display = "none"
+                unLikeButtonDOM[currentPOST].style.display= "flex"
+                numberOfDotsDOM[currentPOST].innerText = jsonObj.dots
+            }
+            if (jsonObj.status == "unlike"){
+                waitIconDOM[currentPOST].style.display = "none"
+                likeButtonDOM[currentPOST].style.display= "flex"
+                numberOfDotsDOM[currentPOST].innerText = jsonObj.dots
+            }
+        if (xmlhttp.status==400){
+            alert("You are not logged in")
+        }
+        }
+    }
+}
+function inputStatusHandler(){
+    let postCoverFormBox = document.getElementById("postCoverFormBox")
+    
+    if(postCoverFormBox.style.display == "none"){
+        postCoverFormBox.style.display = "block"
+    }else{
+        postCoverFormBox.style.display = "none"
+    }
 }
