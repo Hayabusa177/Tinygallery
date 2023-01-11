@@ -15,9 +15,14 @@ Install sqlite3
   sudo apt install sqlite3
 ```
 
+Clone source code
+```
+git clone https://github.com/Hayabusa177/Tinygallery.git TinyGallery
+```
+
 Change work direction
 ```
-  cd <path>
+  cd TinyGallery
 ```
 
 Create virtual environment
