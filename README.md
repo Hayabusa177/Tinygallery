@@ -17,7 +17,7 @@ Install sqlite3
 
 Clone source code
 ```
-git clone https://github.com/Hayabusa177/Tinygallery.git TinyGallery
+  git clone https://github.com/Hayabusa177/Tinygallery.git TinyGallery
 ```
 
 Change work direction
