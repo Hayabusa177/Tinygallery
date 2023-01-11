@@ -1,11 +1,19 @@
 # Tinygallery
 A tiny gallery web application created by flask, 
 
-# feature
-* Multiple user
-* Allow upload multiple images in one post
-* Like button
+# features
+* Multiple user.
+* Allow upload multiple images in one post.
+* Like button.
+* Comment system for each post.
+* Profile page that can display all post from this user.
 * ....
+
+# Plan to add
+* Allow users to reply a comment.
+* Import manga from file system.
+* Users can customize their profile page.
+...
 
 # Installation Instructions:
 
