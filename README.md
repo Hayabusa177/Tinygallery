@@ -1,6 +1,12 @@
 # Tinygallery
 A tiny gallery web application created by flask, 
 
+# feature
+* Multiple user
+* Allow upload multiple images in one post
+* Like button
+* ....
+
 # Installation Instructions:
 
 ##### Install sqlite3 
