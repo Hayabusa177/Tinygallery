@@ -1,7 +1,7 @@
 # Tinygallery
 A tiny gallery web application created by flask, 
 
-# features
+# Features
 * Multiple user.
 * Allow upload multiple images in one post.
 * Like button.
